@@ -1,0 +1,125 @@
+<div class="container col-sm-10">
+  <div class="container col-sm-10">
+    <form class="form-horizontal" (ngSubmit)="createProject()">
+      <div class="row form-group">
+        <label class="control-label col-sm-2" style="text-align:left" for="projectName">Project</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="newProject.projectName" required>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-1 col-sm-offset-2">
+          <input type="checkbox" class="form-check-input" id="checkDate" name="checkDate" [(ngModel)]="newProject.checkDate">
+        </div>
+        <label class="col-sm-2" for="checkDate">Set Start and End Date</label>
+        <div class="col-sm-3">
+          <input type="date" placeholder="Start Date" class="form-control" id="startDate" name="startDate" [(ngModel)]="newProject.startDate">
+        </div>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="newProject.endDate">
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="control-label col-sm-2" for="priority" style="text-align:left">Priority</label>
+        <div class="col-sm-7 range-field ">
+          <input type="range" class="form-control-range" id="priority" name="priority" [(ngModel)]="newProject.priority" min="0" max="30">
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="control-label col-sm-2" for="manager" style="text-align:left">Manager</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="manager" name="manager" [(ngModel)]="newProject.manager" required readonly>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#managerModal">Search</button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="managerModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Select Project Manager</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success col-sm-1 col-sm-offset-7" *ngIf="isAddAction">Add</button>
+      <button type="button" class="btn btn-success col-sm-1 col-sm-offset-7" *ngIf="!isAddAction" (click)="editProject(project)">Update</button>
+      <button type="reset" class="btn btn-outline-dark col-sm-1 col-sm-offset-1">Reset</button>
+    </form>
+  </div>
+
+  <div class="container col-sm-10">
+    <hr style="width: 100%; background-color: blue; height: 1px; border-color : transparent;" />
+  </div>
+
+  <div class="container col-sm-10">
+    <div class="row form-group">
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="searchText" name="searchText" [(ngModel)]="searchText" placeholder="Search...">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-2">
+        <label style="text-align:left" for="sortBy">Sort By:</label>
+      </div>
+      <div class="col-sm-1">
+        <button type="button" class="btn btn-success ">Start Date</button>
+      </div>
+      <div class="col-sm-1 col-sm-offset-1">
+        <button type="button" class="btn btn-success ">End Date</button>
+      </div>
+      <div class="col-sm-1 col-sm-offset-1">
+        <button type="button" class="btn btn-success ">Priority</button>
+      </div>
+      <div class="col-sm-1 col-sm-offset-1">
+        <button type="button" class="btn btn-success ">Completed</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container col-sm-10" *ngFor="let project of projects">
+    <div class="row">
+      <div class="container col-sm-6">
+        <ul class="list-group">
+          <li class="list-group-item"><label style="text-align:left" for="viewProjectName">Project: {{project.projectName}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewNoOfTasks">No of Tasks: {{project.noOfTasks}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewIsCompleted">Completed: {{project.isCompleted}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewIsStartDate">Start Date: {{project.startDate}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewEndDate">End Date: {{project.endDate}}</label></li>
+        </ul>
+      </div>
+
+      <div class="container col-sm-2">
+        <div class="form-group">
+          <label for="viewPriority">Priority</label>
+          <input type="text" class="form-control" id="viewPriority" value="{{project.priority}}" readonly>
+        </div>
+      </div>
+
+      <div class="container col-sm-2">
+        <div class="form-group">
+          <button type="button" class="btn btn-success ">Update</button>
+          <button type="button" class="btn btn-success ">Suspend</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container col-sm-10">
+        <hr style="width: 100%; height: 1px; border-color : blue; border-style: dotted" />
+      </div>
+    </div>
+  </div>
+</div>
