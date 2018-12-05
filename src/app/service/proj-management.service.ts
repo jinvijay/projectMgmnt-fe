@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../modal/user';
+import { Project } from '../modal/project';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,6 +10,7 @@ export class ProjManagementService {
 
   baseUrl: string;
   userUrl: string;
+  projectUrl: string;
   headers: Headers;
   options: RequestOptions;
 
@@ -21,6 +23,7 @@ export class ProjManagementService {
 
     this.baseUrl = "http://localhost:8080/projectManagement/";
     this.userUrl = this.baseUrl + "user/";
+    this.projectUrl = this.baseUrl + "project/";
   }
 
   addUser(user: User): Observable<Response> {
@@ -43,6 +46,24 @@ export class ProjManagementService {
 
   listUsers(): Observable<User[]> {
     return this.http.get(this.userUrl + "get").pipe(
+      map((response: Response) => response.json())
+    );
+  }
+
+  addProject(project: Project): Observable<Response> {
+    return this.http.post(this.projectUrl + "create", JSON.stringify(project), this.options).pipe(
+      map((response: Response) => response)
+    );
+  }
+
+  editProject(project: Project): Observable<Response> {
+    return this.http.put(this.projectUrl + "update", JSON.stringify(project), this.options).pipe(
+      map((response: Response) => response)
+    );
+  }
+
+  listProjects(): Observable<Project[]> {
+    return this.http.get(this.projectUrl + "get").pipe(
       map((response: Response) => response.json())
     );
   }

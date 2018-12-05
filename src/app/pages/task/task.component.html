@@ -16,9 +16,9 @@
       </div>
     </div>
     <div class="row form-group">
-      <div class="col-sm-offset-3">
-        <input type="checkbox" class="form-control" id="isParentTask" name="isParentTask" [(ngModel)]="newTask.isParentTask">
-        <label class="control-label col-sm-2" style="text-align:left" for="taskName">Parent Task</label>
+      <div class="col-sm-offset-2">
+        <input type="checkbox" id="isParentTask" name="isParentTask" [(ngModel)]="newTask.isParentTask">
+        <label for="taskName">Parent Task</label>
       </div>
     </div>
     <div class="row form-group">
@@ -32,18 +32,18 @@
       <div class="col-sm-6">
         <input type="text" class="form-control" id="parentTask" name="parentTask" [(ngModel)]="newTask.parentTask">
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-2">
         <button type="button" class="btn btn-success">Search</button>
       </div>
     </div>
     <div class="row form-group">
       <label class="control-label col-sm-2" style="text-align:left" for="startDate">Start Date</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="startDate" name="startDate" [(ngModel)]="newTask.startDate">
+        <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="newTask.startDate">
       </div>
       <label class="control-label col-sm-2" style="text-align:left" for="endDate">End Date</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="endDate" name="endDate" [(ngModel)]="newTask.endDate">
+        <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="newTask.endDate">
       </div>
     </div>
     <div class="row form-group">
@@ -51,7 +51,7 @@
       <div class="col-sm-6">
         <input type="text" class="form-control" id="User" name="User" [(ngModel)]="newTask.User">
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-2">
         <button type="button" class="btn btn-success">Search</button>
       </div>
     </div>

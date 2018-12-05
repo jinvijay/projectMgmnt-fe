@@ -9,11 +9,13 @@ import { UserComponent } from './pages/user/user.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { TaskComponent } from './pages/task/task.component';
 import { ProjManagementService } from './service/proj-management.service';
+import { TaskviewComponent } from './pages/taskview/taskview.component';
 
 const appPath: Routes = [
   { path: 'addUser', component: UserComponent },
   { path: 'addProject', component: ProjectComponent },
-  { path: 'addTask', component: TaskComponent }
+  { path: 'addTask', component: TaskComponent },
+  { path: 'viewTask', component: TaskviewComponent }
 ];
 
 @NgModule({
@@ -21,7 +23,8 @@ const appPath: Routes = [
     AppComponent,
     UserComponent,
     ProjectComponent,
-    TaskComponent
+    TaskComponent,
+    TaskviewComponent
   ],
   imports: [
     BrowserModule,

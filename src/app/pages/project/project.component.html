@@ -2,9 +2,9 @@
   <div class="container col-sm-10">
     <form class="form-horizontal" (ngSubmit)="createProject()">
       <div class="row form-group">
-        <label class="control-label col-sm-2" style="text-align:left" for="projectName">Project</label>
+        <label class="control-label col-sm-2" style="text-align:left" for="project">Project</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="newProject.projectName" required>
+          <input type="text" class="form-control" id="project" name="project" [(ngModel)]="newProject.project" required>
         </div>
       </div>
       <div class="row form-group">
@@ -28,30 +28,9 @@
       <div class="row form-group">
         <label class="control-label col-sm-2" for="manager" style="text-align:left">Manager</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="manager" name="manager" [(ngModel)]="newProject.manager" required readonly>
-        </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#managerModal">Search</button>
-        </div>
-      </div>
-
-      <div class="modal fade" id="managerModal" role="dialog">
-        <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Select Project Manager</h4>
-            </div>
-            <div class="modal-body">
-              <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-
+          <select name="manager" [(ngModel)]="newProject.manager" required>
+              <option *ngFor="let user of users" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+          </select>
         </div>
       </div>
 
@@ -94,11 +73,11 @@
     <div class="row">
       <div class="container col-sm-6">
         <ul class="list-group">
-          <li class="list-group-item"><label style="text-align:left" for="viewProjectName">Project: {{project.projectName}}</label></li>
-          <li class="list-group-item"><label style="text-align:left" for="viewNoOfTasks">No of Tasks: {{project.noOfTasks}}</label></li>
-          <li class="list-group-item"><label style="text-align:left" for="viewIsCompleted">Completed: {{project.isCompleted}}</label></li>
-          <li class="list-group-item"><label style="text-align:left" for="viewIsStartDate">Start Date: {{project.startDate}}</label></li>
-          <li class="list-group-item"><label style="text-align:left" for="viewEndDate">End Date: {{project.endDate}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewProjectName">Project: {{project.project}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewNoOfTasks">No of Tasks: {{project.noOfTasks == null ? 0 : project.noOfTasks }}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewIsCompleted">Completed: {{project.isCompleted == null ? 'No' : project.isCompleted }}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewIsStartDate">Start Date: {{project.startDate | date: 'dd/MM/yyyy'}}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewEndDate">End Date: {{project.endDate | date: 'dd/MM/yyyy'}}</label></li>
         </ul>
       </div>
 
@@ -111,7 +90,7 @@
 
       <div class="container col-sm-2">
         <div class="form-group">
-          <button type="button" class="btn btn-success ">Update</button>
+          <button type="button" class="btn btn-success " (click)="editClick(project)">Update</button>
           <button type="button" class="btn btn-success ">Suspend</button>
         </div>
       </div>

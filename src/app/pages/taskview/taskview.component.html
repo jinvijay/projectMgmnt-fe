@@ -1,0 +1,57 @@
+<div class="container col-sm-12">
+  <div class="row form-group">
+    <label class="control-label col-sm-1" style="text-align:left" for="project">Project</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="project" name="project" [(ngModel)]="project">
+    </div>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-default">Search</button>
+    </div>
+    <label class="control-label col-sm-1" style="text-align:left" for="sort">Sort Task By:</label>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-default">Start Date</button>
+    </div>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-default">End Date</button>
+    </div>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-default">Priority</button>
+    </div>
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-default">Completed</button>
+    </div>
+  </div>
+</div>
+
+<div class="container col-sm-10">
+  <hr style="width: 100%; height: 1px; border-color : blue; border-style: dotted" />
+</div>
+
+<div class="container col-sm-10" >
+  <div class="form-group col-sm-2">
+    <label for="taskName">Task</label>
+    <textarea class="form-control" id="taskName" rows="2" style="resize: none">task.name</textarea>
+  </div>
+  <div class="form-group col-sm-2">
+    <label for="parentName">Parent</label>
+    <textarea type="text" class="form-control" id="parentName" style="resize: none">task.parent.name</textarea>
+  </div>
+  <div class="form-group col-sm-1">
+    <label for="priority">Priority</label>
+    <p class="text-left">task.priority</p>
+  </div>
+  <div class="form-group col-sm-2">
+    <label for="priority">Start</label>
+    <p class="text-left">task.startDate</p>
+  </div>
+  <div class="form-group col-sm-2">
+    <label for="priority">End</label>
+    <p class="text-left">task.endDate</p>
+  </div>
+  <div class="col-sm-1">
+    <button type="button" class="btn btn-default">Edit</button>
+  </div>
+  <div class="col-sm-1">
+    <button type="button" class="btn btn-default">End Task</button>
+  </div>
+</div>

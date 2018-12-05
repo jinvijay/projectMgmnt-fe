@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
   users: User[];
   errorMsg: string;
   isAddAction: boolean = true;
+  
 
   constructor(private activatedRoute: ActivatedRoute,
     private pmService: ProjManagementService) { }
