@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../modal/user';
 import { Project } from '../modal/project';
+import { Task } from '../modal/task';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,6 +12,7 @@ export class ProjManagementService {
   baseUrl: string;
   userUrl: string;
   projectUrl: string;
+  taskUrl: string;
   headers: Headers;
   options: RequestOptions;
 
@@ -24,6 +26,7 @@ export class ProjManagementService {
     this.baseUrl = "http://localhost:8080/projectManagement/";
     this.userUrl = this.baseUrl + "user/";
     this.projectUrl = this.baseUrl + "project/";
+    this.taskUrl = this.baseUrl + "task/";
   }
 
   addUser(user: User): Observable<Response> {
@@ -64,6 +67,24 @@ export class ProjManagementService {
 
   listProjects(): Observable<Project[]> {
     return this.http.get(this.projectUrl + "get").pipe(
+      map((response: Response) => response.json())
+    );
+  }
+
+  addTask(task: Task): Observable<Response> {
+    return this.http.post(this.taskUrl + "create", JSON.stringify(task), this.options).pipe(
+      map((response: Response) => response)
+    );
+  }
+
+  listTasks(): Observable<Task[]> {
+    return this.http.get(this.taskUrl + "get").pipe(
+      map((response: Response) => response.json())
+    );
+  }
+
+   listParentTasks(): Observable<Task[]> {
+    return this.http.get(this.taskUrl + "get/parent").pipe(
       map((response: Response) => response.json())
     );
   }

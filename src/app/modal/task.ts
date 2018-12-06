@@ -5,7 +5,7 @@ export class Task {
     public taskId: number;
     public parentTask: Task;
     public project: Project;
-    public name: string;
+    public task: string;
     public startDate: Date;
     public endDate: Date;
     public priority: number;
