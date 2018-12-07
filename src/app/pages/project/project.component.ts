@@ -15,9 +15,20 @@ export class ProjectComponent implements OnInit {
   serviceMessage: string;
   errorMsg: string;
   isAddAction: boolean = true;
-  projects: Project[];
+  projects: Project[] = [];
+  filteredProjects: Project[] = [];
   users: User[];
   selectedManager: User;
+  _searchText: string;
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
+    this.filteredProjects = this.searchText ? this.performFilter(this.searchText) : this.projects;
+  }
 
   constructor(private activatedRoute: ActivatedRoute,
     private pmService: ProjManagementService) { }
@@ -36,7 +47,7 @@ export class ProjectComponent implements OnInit {
 
   refreshProjects() {
     this.pmService.listProjects().subscribe(
-      data => { this.projects = data; this.errorMsg = null },
+      data => { this.projects = data; this.filteredProjects = this.projects; this.errorMsg = null },
       error => { this.errorMsg = "Error in calling server"; console.log(error); }
     );
   }
@@ -60,6 +71,28 @@ export class ProjectComponent implements OnInit {
       error => { this.errorMsg = "Error in calling server"; console.log(error); }
     );
 
+  }
+
+  performFilter(searchText: string): Project[] {
+    searchText = searchText.toLocaleLowerCase();
+    return this.projects.filter(
+      (project: Project) => (project.project.toLocaleLowerCase().indexOf(searchText) !== -1));
+  }
+
+  sortByStartDate() {
+    this.filteredProjects.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+  }
+
+  sortByEndDate() {
+    this.filteredProjects.sort((a, b) => new Date(a.endDate).getTime() - new Date(b.endDate).getTime());
+  }
+
+  sortByPriority() {
+    this.filteredProjects.sort((a, b) => a.priority - b.priority);
+  }
+
+  sortByCompleted() {
+    this.filteredProjects.sort((a, b) => new Date(a.endDate).getTime() - new Date(b.endDate).getTime());
   }
 
 }

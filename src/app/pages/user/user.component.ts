@@ -12,16 +12,35 @@ export class UserComponent implements OnInit {
 
   newUser: User = new User();
   serviceMessage: string;
-  users: User[];
+  users: User[] = [];
+  filteredUsers: User[] = [];
   errorMsg: string;
   isAddAction: boolean = true;
-  
+  _searchText: string;
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
+    this.filteredUsers = this.searchText ? this.performFilter(this.searchText) : this.users;
+  }
 
   constructor(private activatedRoute: ActivatedRoute,
-    private pmService: ProjManagementService) { }
+    private pmService: ProjManagementService) {
+
+  }
 
   ngOnInit() {
     this.refreshUsers();
+  }
+
+  performFilter(searchText: string): User[] {
+    searchText = searchText.toLocaleLowerCase();
+    return this.users.filter(
+      (user: User) => ((user.firstName.toLocaleLowerCase().indexOf(searchText) !== -1) ||
+        (user.lastName.toLocaleLowerCase().indexOf(searchText) !== -1)));
   }
 
   createUser() {
@@ -52,9 +71,21 @@ export class UserComponent implements OnInit {
 
   refreshUsers() {
     this.pmService.listUsers().subscribe(
-      data => { this.users = data;  this.errorMsg = null },
+      data => { this.users = data; this.filteredUsers = this.users; this.errorMsg = null },
       error => { this.errorMsg = "Error in calling server"; console.log(error); }
     );
+  }
+
+  sortByFirstName() {
+    this.filteredUsers.sort((a, b) => a.firstName.localeCompare(b.firstName));
+  }
+
+  sortByLastName() {
+    this.filteredUsers.sort((a, b) => a.lastName.localeCompare(b.lastName));
+  }
+
+  sortByEmpId() {
+    this.filteredUsers.sort((a, b) => a.empId - b.empId);
   }
 
 }

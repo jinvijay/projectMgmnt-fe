@@ -1,11 +1,14 @@
 <div class="container col-sm-12">
   <div class="row form-group">
     <label class="control-label col-sm-1" style="text-align:left" for="project">Project</label>
-    <div class="col-sm-2">
-      <input type="text" class="form-control" id="project" name="project" [(ngModel)]="project">
+    <div class="col-sm-6">
+      <select name="selectedProject" [(ngModel)]="selectedProject" required>
+              <option *ngFor="let project of listedProjects" [ngValue]="project">{{project.project}}</option>
+          </select>
     </div>
+
     <div class="col-sm-1">
-      <button type="button" class="btn btn-default">Search</button>
+      <button type="button" class="btn btn-default" (click)="searchTasks()">Search</button>
     </div>
     <label class="control-label col-sm-1" style="text-align:left" for="sort">Sort Task By:</label>
     <div class="col-sm-1">
@@ -27,11 +30,11 @@
   <hr style="width: 100%; height: 1px; border-color : blue; border-style: dotted" />
 </div>
 
-<div class="container col-sm-10" *ngFor="let task of tasks">
+<div class="container col-sm-10" *ngFor="let task of filteredTasks">
   <div class="form-group col-sm-2">
     <label for="taskName">Task</label>
     <textarea class="form-control" id="taskName" rows="2" style="resize: none" [value]="task.task"></textarea>
-  </div> 
+  </div>
   <div class="form-group col-sm-2">
     <label for="parentName">Parent</label>
     <textarea type="text" class="form-control" id="parentName" style="resize: none" [value]="task.parentTask == null ? '' : task.parentTask.task"></textarea>

@@ -55,21 +55,21 @@
         <label style="text-align:left" for="sortBy">Sort By:</label>
       </div>
       <div class="col-sm-1">
-        <button type="button" class="btn btn-success ">Start Date</button>
+        <button type="button" class="btn btn-success " (click)="sortByStartDate()">Start Date</button>
       </div>
       <div class="col-sm-1 col-sm-offset-1">
-        <button type="button" class="btn btn-success ">End Date</button>
+        <button type="button" class="btn btn-success " (click)="sortByEndDate()">End Date</button>
       </div>
       <div class="col-sm-1 col-sm-offset-1">
-        <button type="button" class="btn btn-success ">Priority</button>
+        <button type="button" class="btn btn-success " (click)="sortByPriority()">Priority</button>
       </div>
       <div class="col-sm-1 col-sm-offset-1">
-        <button type="button" class="btn btn-success ">Completed</button>
+        <button type="button" class="btn btn-success " (click)="sortByCompleted()">Completed</button>
       </div>
     </div>
   </div>
 
-  <div class="container col-sm-10" *ngFor="let project of projects">
+  <div class="container col-sm-10" *ngFor="let project of filteredProjects">
     <div class="row">
       <div class="container col-sm-6">
         <ul class="list-group">
