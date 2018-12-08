@@ -52,7 +52,7 @@
     <p class="text-left">{{task.endDate | date: 'dd/MM/yyyy'}}</p>
   </div>
   <div class="col-sm-1">
-    <button type="button" class="btn btn-default">Edit</button>
+    <button type="button" class="btn btn-default" (click)="router.navigate(['/addTask',task]);" >Edit</button>
   </div>
   <div class="col-sm-1">
     <button type="button" class="btn btn-default">End Task</button>

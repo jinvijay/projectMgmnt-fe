@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../modal/task';
 import { Project } from '../../modal/project';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ProjManagementService } from '../../service/proj-management.service';
 
 
@@ -20,7 +20,8 @@ export class TaskviewComponent implements OnInit {
   errorMsg: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private pmService: ProjManagementService) { }
+    private pmService: ProjManagementService,
+    private router: Router) { }
 
   ngOnInit() {
     this.refreshTasks();
@@ -57,6 +58,10 @@ export class TaskviewComponent implements OnInit {
   performFilter(project: Project): Task[] {
     return this.tasks.filter(
       (task: Task) => ((task.project.projectId === project.projectId)));
+  }
+
+  edit(task: Task) {
+
   }
 
 }
