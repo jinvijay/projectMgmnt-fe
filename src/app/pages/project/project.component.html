@@ -74,7 +74,7 @@
       <div class="container col-sm-6">
         <ul class="list-group">
           <li class="list-group-item"><label style="text-align:left" for="viewProjectName">Project: {{project.project}}</label></li>
-          <li class="list-group-item"><label style="text-align:left" for="viewNoOfTasks">No of Tasks: {{project.noOfTasks == null ? 0 : project.noOfTasks }}</label></li>
+          <li class="list-group-item"><label style="text-align:left" for="viewNoOfTasks">No of Tasks: {{project.tasks.length == null ? 0 : project.tasks.length }}</label></li>
           <li class="list-group-item"><label style="text-align:left" for="viewIsCompleted">Completed: {{project.isCompleted == null ? 'No' : project.isCompleted }}</label></li>
           <li class="list-group-item"><label style="text-align:left" for="viewIsStartDate">Start Date: {{project.startDate | date: 'dd/MM/yyyy'}}</label></li>
           <li class="list-group-item"><label style="text-align:left" for="viewEndDate">End Date: {{project.endDate | date: 'dd/MM/yyyy'}}</label></li>
